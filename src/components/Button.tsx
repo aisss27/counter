@@ -1,20 +1,21 @@
 import React from 'react';
 type ButtonPropsType = {
-    type: 'increment' | 'reset'
+    title: string
     buttonFunc: () => void
-    count: number
+    disabled?: boolean
 }
 export const Button = (props: ButtonPropsType) => {
-    const isDisabledInc = props.type === 'increment' ? props.count === 5 : false;
-    const isDisabledReset = props.type === 'reset' ? props.count === 0 : false;
-
+   // const isDisabledInc = props.type === 'increment' ? props.count === 5 : false;
+    //const isDisabledReset = props.type === 'reset' ? props.count === 0 : false;
+    const callbackButtonHandler = () => {
+        props.buttonFunc();
+    }
     return (
         <button
-            style={{ opacity: isDisabledInc || isDisabledReset ? 0.5 : 1 }}
-            disabled={isDisabledInc || isDisabledReset}
-            onClick={props.buttonFunc}
+            disabled={props.disabled}
+            onClick={callbackButtonHandler}
         >
-            {props.type === 'increment' ? 'inc' : 'reset'}
+            {props.title}
         </button>
     )
 }
